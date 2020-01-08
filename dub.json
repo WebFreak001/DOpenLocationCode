@@ -1,5 +1,6 @@
 {
 	"name": "d-open-location-code",
+	"description": "port of google's open-location-code (also known as Plus+Codes)",
 	"license": "Apache-2.0",
 	"targetType": "library",
 	"configurations": [

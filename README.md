@@ -2,7 +2,7 @@
 
 Port of the [open-location-code](https://github.com/google/open-location-code) library (also known as [plus codes](https://plus.codes)) for identifying geo areas.
 
-This ports commit (a6eb95b)[https://github.com/google/open-location-code/commit/a6eb95b4d2f934e94dae4f092260caf7f3db7967]
+This ports commit [a6eb95b](https://github.com/google/open-location-code/commit/a6eb95b4d2f934e94dae4f092260caf7f3db7967).
 
 ## Example
 
@@ -11,12 +11,12 @@ normal usage:
 ```d
 import openlocationcode;
 
-// get geo coordinates from plus code
+// get geo coordinates from plus code string
 OpenLocationCode plusCode = OpenLocationCode.fromString("8FVC2222+22GCCCC");
 writeln(plusCode.decode());
 // -> 
 
-// get plus code from geo coordinates
+// get plus code string from geo coordinates
 OpenLocationCode generatedPlusCode = OpenLocationCode.encode(lat, lon);
 writeln(generatedPlusCode.code);
 ```
@@ -28,7 +28,7 @@ writeln(generatedPlusCode.code);
 ```d
 import openlocationcode;
 
-// get geo coordinates from plus code
+// get geo coordinates from plus code string
 string input = "8FVC2222+22GCCCC";
 if (!input.isValidCode)
 	return error;
@@ -39,7 +39,7 @@ if (!plusCode.isFull)
 OpenLocationCodeArea area = plusCode.decodeTrustedFull();
 printf("area around %d, %d", area.centerLatitude, area.centerLongitude);
 
-// get plus code from geo coordinates
+// get plus code string from geo coordinates
 ubyte[maxOLCLength] buffer;
 scope ubyte[] generatedPlusCodeString = OpenLocationCode.encode(buffer, lat, lon);
 printf("%s", cast(char[])generatedPlusCodeString);
