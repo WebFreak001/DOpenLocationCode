@@ -1,0 +1,2 @@
+name "benchmark"
+dependency "d-open-location-code" path=".."

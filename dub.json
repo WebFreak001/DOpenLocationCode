@@ -1,0 +1,21 @@
+{
+	"name": "d-open-location-code",
+	"license": "Apache-2.0",
+	"targetType": "library",
+	"configurations": [
+		{
+			"name": "library"
+		},
+		{
+			"name": "unittest",
+			"targetType": "executable",
+			"preBuildCommands": [
+				"$DUB run --compiler=$$DC unit-threaded -c gen_ut_main -- -f bin/ut.d"
+			],
+			"mainSourceFile": "bin/ut.d",
+			"dependencies": {
+				"unit-threaded": "*"
+			}
+		}
+	]
+}
