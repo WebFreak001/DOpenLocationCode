@@ -27,6 +27,16 @@ void main()
 		}
 	}
 
+	// get geo coordinates from plus code string
+	OpenLocationCode plusCode = OpenLocationCode.fromString("8FVC2222+22GCCCC");
+	writeln(plusCode.decode());
+
+	// get plus code string from geo coordinates
+	OpenLocationCode generatedPlusCode = OpenLocationCode.encode(54, 4);
+	writeln(generatedPlusCode.code);
+
+	testNogc();
+
 	TestData[] list;
 	list.length = loops;
 	foreach (i; 0 .. loops)
@@ -50,4 +60,25 @@ void main()
 	end = MonoTime.currTime();
 	dur = end - start;
 	writefln("Decode %s loops in %s;\n\t%s per call", loops, dur, dur / loops);
+}
+
+void testNogc() @nogc
+{
+	import core.stdc.stdio;
+
+	// get geo coordinates from plus code string
+	string input = "8FVC2222+22GCCCC";
+	if (!input.isValidUppercaseCode)
+		return;
+	OpenLocationCode plusCode = OpenLocationCode.fromTrustedString(input);
+
+	if (!plusCode.isFull)
+		return;
+	OpenLocationCodeArea area = plusCode.decodeTrustedFull();
+	printf("area around %f, %f\n", area.centerLatitude, area.centerLongitude);
+
+	// get plus code string from geo coordinates
+	ubyte[maxOLCLength] buffer;
+	scope ubyte[] generatedPlusCodeString = OpenLocationCode.encode(buffer, 54, 4);
+	printf("%.*s\n", generatedPlusCodeString.length, &generatedPlusCodeString[0]);
 }
